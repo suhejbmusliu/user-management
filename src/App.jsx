@@ -5,8 +5,6 @@ import UserListPage from "./pages/UserListPage";
 import UserDetailPage from "./pages/UserDetailPage";
 
 export default function App() {
-  // All user state lives here — passed down as props.
-  // In a larger app this would use React Context or Redux store.
   const { users, loading, error, addUser, updateUser, deleteUser } = useUsers();
 
   return (

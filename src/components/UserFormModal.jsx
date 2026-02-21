@@ -36,8 +36,7 @@ export default function UserFormModal({ initialData, onSubmit, onClose }) {
       setErrors(validationErrors);
       return;
     }
-
-    // ✅ Parent decides what happens after submit (close / show another modal / navigate)
+    
     onSubmit(form);
   };
 

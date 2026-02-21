@@ -33,7 +33,7 @@ export function useUsers() {
     return () => { cancelled = true; };
   }, []);
 
-  // ─── Actions ─────────────────────────────────────────────────────────────────
+  // Actions: add, update, delete 
   const addUser = useCallback((formData) => {
     const newUser = {
       id:       nextId++,

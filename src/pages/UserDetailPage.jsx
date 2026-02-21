@@ -96,7 +96,7 @@ export default function UserDetailPage({ users }) {
   );
 }
 
-// ─── Sub-components ───────────────────────────────────────────────────────────
+// Sub-components 
 
 function BackButton({ onClick }) {
   return (

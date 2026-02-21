@@ -1,4 +1,4 @@
-// ─── Action Types ─────────────────────────────────────────────────────────────
+//  Action Types ─
 export const ACTIONS = {
   SET_USERS:   "SET_USERS",
   SET_LOADING: "SET_LOADING",
@@ -8,14 +8,14 @@ export const ACTIONS = {
   DELETE_USER: "DELETE_USER",
 };
 
-// ─── Initial State ────────────────────────────────────────────────────────────
+// Initial State
 export const initialState = {
   users:   [],
   loading: false,
   error:   null,
 };
 
-// ─── Reducer ──────────────────────────────────────────────────────────────────
+// Reducer 
 export function usersReducer(state, action) {
   switch (action.type) {
     case ACTIONS.SET_LOADING:
@@ -28,7 +28,6 @@ export function usersReducer(state, action) {
       return { ...state, users: action.payload, loading: false, error: null };
 
     case ACTIONS.ADD_USER:
-      // New users are inserted at the top of the list
       return { ...state, users: [action.payload, ...state.users] };
 
     case ACTIONS.UPDATE_USER:

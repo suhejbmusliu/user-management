@@ -22,14 +22,12 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
 
   const [newUserIds, setNewUserIds] = useState(new Set());
 
-  // ✅ NEW: delete modal state
   const [deleteUser, setDeleteUser] = useState(null);
   const [deleting, setDeleting] = useState(false);
 
-  // ✅ NEW: after-edit “go to details” modal
   const [savedUser, setSavedUser] = useState(null);
 
-  // ─── Filter + Sort (memoized for performance) ────────────────────────────────
+  // Filter + Sort 
   const filteredUsers = useMemo(() => {
     const query = search.toLowerCase().trim();
 
@@ -55,7 +53,7 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
       });
   }, [users, search, sortKey, sortDir]);
 
-  // ─── Handlers ────────────────────────────────────────────────────────────────
+  //Handlers 
   const handleSort = (key) => {
     if (sortKey === key) setSortDir((prev) => prev * -1);
     else {
@@ -85,10 +83,10 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
 
     onUpdate(updated);
 
-    // ✅ close edit modal
+    // close edit modal
     setEditingUser(null);
 
-    // ✅ open “go to details?” modal
+    // open “go to details?” modal
     setSavedUser(updated);
   };
 
@@ -102,10 +100,10 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
       }
     : null;
 
-  // ✅ Open delete confirm modal
+  //  Open delete confirm modal
   const openDeleteModal = (user) => setDeleteUser(user);
 
-  // ✅ Confirm delete
+  //  Confirm delete
   const confirmDelete = async (user) => {
     try {
       setDeleting(true);
@@ -119,13 +117,13 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
     }
   };
 
-  // ✅ After edit -> go to details
+  // After edit -> go to details
   const goToDetailsAfterSave = (user) => {
     setSavedUser(null);
     navigate(`/user/${user.id}`);
   };
 
-  // ─── Loading State ────────────────────────────────────────────────────────────
+  // Loading State 
   if (loading) {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-4">
@@ -135,7 +133,7 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
     );
   }
 
-  // ─── Error State ──────────────────────────────────────────────────────────────
+  //Error State
   if (error) {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-2">
@@ -146,7 +144,7 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
     );
   }
 
-  // ─── Render ──────────────────────────────────────────────────────────────────
+  // Render
   return (
     <div>
       {/* Modals */}
@@ -166,7 +164,7 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
         />
       )}
 
-      {/* ✅ Delete modal */}
+      {/* Delete modal */}
       <ConfirmDeleteModal
         open={!!deleteUser}
         user={deleteUser}
@@ -175,7 +173,7 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
         onConfirm={confirmDelete}
       />
 
-      {/* ✅ After-edit modal */}
+      {/* After-edit modal */}
       <EditGoToDetailsModal
         open={!!savedUser}
         user={savedUser}
@@ -242,7 +240,7 @@ export default function UserListPage({ users, loading, error, onAdd, onUpdate, o
         onSort={handleSort}
         newUserIds={newUserIds}
         onEdit={(user) => setEditingUser(user)}
-        onDelete={openDeleteModal}  // ✅ IMPORTANT: pass modal opener, not onDelete
+        onDelete={openDeleteModal} 
       />
     </div>
   );
