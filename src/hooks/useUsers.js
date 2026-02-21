@@ -2,16 +2,12 @@ import { useReducer, useEffect, useCallback } from "react";
 import { fetchUsers } from "../api/users";
 import { usersReducer, initialState, ACTIONS } from "../store/usersReducer";
 
-let nextId = 1000; // Local-only IDs start high to avoid collisions with API ids
+let nextId = 1000;
 
-/**
- * Custom hook that manages all user state.
- * Mirrors Redux patterns: dispatch, actions, derived state.
- */
 export function useUsers() {
   const [state, dispatch] = useReducer(usersReducer, initialState);
 
-  // ─── Load users from API on mount ───────────────────────────────────────────
+  //  Load users from API on mount 
   useEffect(() => {
     let cancelled = false;
 
